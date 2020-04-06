@@ -1,0 +1,6 @@
+name: Timer
+version: 1.0
+main: me.trumpet.timer.Main
+description: A in game timer
+commands:
+    timer:
