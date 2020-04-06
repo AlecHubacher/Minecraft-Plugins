@@ -1,17 +1,11 @@
 package me.trumpet.autofillchests.commands;
-
-//import java.util.HashMap;
-//import java.util.Map;
 import java.util.Random;
 
 import org.bukkit.Bukkit;
-//import org.bukkit.Bukkit;
-//import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
-//import org.bukkit.World;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
 import org.bukkit.command.Command;
@@ -24,7 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import me.trumpet.autofillchests.Main;
 
 public class AutoFillChestsCommands implements CommandExecutor{
-	//@SuppressWarnings("unused")
 	private Main plugin;
 	
 	public AutoFillChestsCommands(Main plugin)
@@ -46,8 +39,6 @@ public class AutoFillChestsCommands implements CommandExecutor{
 			return true;
 		}
 		Player p = (Player) sender;
-		//World world = Bukkit.getServer().getWorld("World");
-		p.sendMessage("It workssssssasdf!");
 		if(cmd.getName().equalsIgnoreCase("fillchests"))
 		{
 			for(Chunk chunk : plugin.getServer().getWorld("World").getLoadedChunks()){
@@ -62,7 +53,6 @@ public class AutoFillChestsCommands implements CommandExecutor{
 		}
 		return false;
 	}
-	//12:13:30
 	
 	public void fillChests(Inventory inv,BlockState entities)
 	{
@@ -80,8 +70,6 @@ public class AutoFillChestsCommands implements CommandExecutor{
 		double xVal= entities.getLocation().getX() -  chestLoc.getX();
 		double yVal= entities.getLocation().getY() - chestLoc.getY();
 		double zVal = entities.getLocation().getZ() - chestLoc.getZ();
-		//Bukkit.broadcastMessage(""+xVal +" " + yVal + " " + zVal);
-		//Bukkit.broadcastMessage("Actual Location " + chestLoc.getX() +" " + chestLoc.getY() +" "+ chestLoc.getZ());
 		if(item == 1 || item == 2 || item == 3){
 		inv.setItem(slot, new ItemStack(Material.ENDER_PEARL, 1));
 		}else if(item == 4 || item == 5 || item == 6){
@@ -169,16 +157,8 @@ public class AutoFillChestsCommands implements CommandExecutor{
 			Bukkit.broadcastMessage("we made it");
 			inv.setItem(slot, new ItemStack(Material.STONE_SWORD));
 		}
-	
 
-		
-		
 		}
-	
-		
-		
+
 	}
-		
-		
-		
 	}
