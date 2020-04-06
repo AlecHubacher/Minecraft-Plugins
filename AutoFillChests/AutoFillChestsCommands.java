@@ -154,7 +154,6 @@ public class AutoFillChestsCommands implements CommandExecutor{
 			{
 				continue;
 			}
-			Bukkit.broadcastMessage("we made it");
 			inv.setItem(slot, new ItemStack(Material.STONE_SWORD));
 		}
 
