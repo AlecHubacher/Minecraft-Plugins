@@ -27,12 +27,8 @@ public class AutoFillChestsCommands implements CommandExecutor{
 		
 	}
 	
-	//Map<Material, Map<Integer, Integer>> itemList = new HashMap<Material, Map<Integer, Integer>>();
-	
-	
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		//itemList.put(Material.ARROW, new HashMap() {{put(30,1);}});
 		if(!(sender instanceof Player))
 		{
 			sender.sendMessage("Only players may execute!");
