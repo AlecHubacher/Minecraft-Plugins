@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import me.trumpet.autofillchests.Main;
+import me.trumpet.autofillchests.Main
 
 public class AutoFillChestsCommands implements CommandExecutor{
 	private Main plugin;
