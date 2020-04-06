@@ -1,4 +1,4 @@
-package me.trumpet.autofillchests.commands;
+package me.trumpet.autofillchests.commands
 import java.util.Random;
 
 import org.bukkit.Bukkit;
