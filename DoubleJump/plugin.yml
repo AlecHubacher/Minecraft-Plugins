@@ -1,0 +1,5 @@
+name: DoubleJump
+main: me.trumpet.doublejump.Main
+version: 1.0
+author: trumpet
+description: causes player to double jump
