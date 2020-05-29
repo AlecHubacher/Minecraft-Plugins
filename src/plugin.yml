@@ -1,0 +1,7 @@
+name: DeathSwap
+version: 1.0
+main: me.trumpet.deathswap.Main
+description: swap players positions
+commands:
+    deathSwap:
+    deathstop:
