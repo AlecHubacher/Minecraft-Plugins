@@ -11,6 +11,25 @@ Commands for this plugin:
 Commands for this plugin:  
 /deathSwap starts the plugin.
 /deathStop stops the plugin.  
+  
+**DoubleJump**
+This plugin allows for players to double jump/get an extra boost. To activate command double press space bar.  
+  
+**MCSG**
+This plugin is supposed to resemble the bare bones of a survival games plugin. When the start command is run, all players will be teleported to their pedastal and will be unable to leave their pedastal until the 10 second countdown has ended thus beginning game.
+This can be used in conjunction with the autofillchests plugin.  
+  
+Commands for this plugin:  
+/game start <game length- Integer represented in minutes>  
+/game stop stops the game
+/stats shows the player their stats  
+    
+The data you get when running the stats command:  
+Amount of games played  
+Amount of players killed  
+Amount of games won  
+Amount of deathmatches been to (still needs to be implemented)  
+Kill per death ratio  
 
 
 
