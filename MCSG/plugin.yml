@@ -1,0 +1,8 @@
+name: MCSG
+version: 1.0
+main: me.trumpet.mcsg.Main
+description: mcsg reborn
+commands:
+    game:
+    givePotion:
+    stats:
