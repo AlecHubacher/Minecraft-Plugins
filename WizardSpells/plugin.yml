@@ -1,0 +1,12 @@
+name: WizardSpells
+version: 1.0
+main: me.trumpet.wizardspells.Main
+description: cast a wizard spell
+commands:
+    expelliarmus:
+    spellstop:
+    avada-kedavra:
+    bombarda:
+    wingardium-leviosa:
+    incendio:
+    accio:
