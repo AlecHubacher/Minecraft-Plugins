@@ -1,0 +1,15 @@
+name: NickFeature
+version: 1.0
+author: trumpet
+main: me.trumpet.nickfeature.Main
+description: nick
+
+commands:
+    nick:
+        description: get dif name
+        aliases: [Nick, disguise, d]
+        usage: Syntax error! Simply type /&lt;command&gt; to nick yourself.
+    unNick:
+        description: get original name
+        aliases: [ud]
+        usage: Syntax error! Simply tpe /&lt;command&gt; to get original name.
