@@ -30,10 +30,34 @@ Amount of players killed
 Amount of games won  
 Amount of deathmatches been to (still needs to be implemented)  
 Kill per death ratio  
+  
+**NickFeature**  
+This plugin allows you to change your in game name as well as the name that shows up in tab.  
+  
+Commands for this plugin:  
+/nick <new name you want> this will change your name  aliases (other names for the same command) - disguise, d  
+/unNick will change your name back to your original name  aliases - ud  
+    
+**RankSystem**  
+This plugin is still being implemented not very much to comment on as of now  
+  
+**Timer**  
+This plugin allows you to start a timer. It will show up as a boss bar at the top of your screen. The life of the boss bar will reduce continually until the timer runs out. Above the boss bar will be a normal timer.  
+  
+Commands for this plugin:  
+/timer start <timer amount- Integer represented in minutes> starts the timer  
+/timer stop stops the timer  
+    
+**WizardSpells**  
+This plugin gives you the ability to cast spells from the harry potter world.  
+There are 6 spells:  
+expelliarmus: disarms opponent  
+avada-kedavra: killing curse  
+bombarda: makes explosion  
+wingardium-leviosa: causes player to levitate off the ground for a few seconds  
+incendio: sets player on fire for a few seconds  
+accio: gives player asked for  
 
-
-
-**ji**
 
 
 
