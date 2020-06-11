@@ -1,0 +1,10 @@
+name: MinecraftGame
+version: ${project.version}
+main: mproject.dontknow.Dontknow
+description: this is a description
+api-version: 1.13
+commands:
+  Truce:
+    description: Allows for trucing in game
+  Setsolo:
+    description: Sets a solo player for game
