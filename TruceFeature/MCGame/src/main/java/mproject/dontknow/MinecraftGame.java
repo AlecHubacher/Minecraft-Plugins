@@ -15,7 +15,7 @@ public final class MinecraftGame extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
 
-        new TruceFeature(this, "Mr_Bari_99");
+        new TruceFeature(this);
         getServer().getPluginManager().registerEvents(this, this);
 
     }
