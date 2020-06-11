@@ -3,5 +3,7 @@ version: ${project.version}
 main: mproject.dontknow.Dontknow
 api-version: 1.13
 commands:
-  TruceFeature:
+  Truce:
     description: Allows for trucing in game
+  Setsolo:
+    description: Sets a solo player for game
