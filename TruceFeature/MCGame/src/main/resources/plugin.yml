@@ -1,0 +1,7 @@
+name: MinecraftGame
+version: ${project.version}
+main: mproject.dontknow.Dontknow
+api-version: 1.13
+commands:
+  TruceFeature:
+    description: Allows for trucing in game
