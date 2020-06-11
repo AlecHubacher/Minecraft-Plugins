@@ -29,20 +29,14 @@ public class TruceFeature implements CommandExecutor
     private MinecraftGame plugin;
     private String soloPlayer;
     private List<Player> playerList = (List<Player>) plugin.getServer().getWorld("World").getPlayers();
-    //int playerAmount = plugin.getServer().getWorld("World").getPlayers().size();
 
 
-    public TruceFeature(MinecraftGame plugin, String soloPlayer)
+    public TruceFeature(MinecraftGame plugin)
     {
         this.plugin = plugin;
         plugin.getCommand("Truce").setExecutor(this);
-
-        this.soloPlayer = soloPlayer;
+        plugin.getCommand("Setsolo").setExecutor(this);
     }
-
-    ArrayList<String> p1 = new ArrayList<>(2);
-    ArrayList<String> p2 = new ArrayList<>(2);
-    ArrayList<String> p3 = new ArrayList<>(2);
 
     HashMap<Player, ArrayList<Player>> truceMap = new HashMap<>();
 
