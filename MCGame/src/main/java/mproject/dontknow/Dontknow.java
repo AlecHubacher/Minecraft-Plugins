@@ -1,6 +1,7 @@
 package mproject.dontknow;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -35,7 +36,7 @@ public final class Dontknow extends JavaPlugin implements Listener {
     }
 
 
-    boolean isSwap = false;
+    //boolean isRequestSwap = false;
     int count = 0;
     int track = 0;
     int swapTrack = 0;
@@ -43,83 +44,124 @@ public final class Dontknow extends JavaPlugin implements Listener {
     Player dontSwapMultiple;
 
     //add a cooldown of some sort
+/*
+    @EventHandler
+    public void findTarget(PlayerItemHeldEvent e)
+    {
+        ItemStack item = e.getPlayer().getInventory().getItemInMainHand();
+        Player p = e.getPlayer();
+        if(item.equals(TruceFeature.compass))
+        {
+            Location loc = TruceFeature.soloPlayer.getLocation();
+            p.setCompassTarget(loc);
+
+        }
+    }
+
+ */
+
     @EventHandler
     public void truceTeleport(PlayerInteractEvent e)
     {
         ItemStack item = e.getPlayer().getInventory().getItemInMainHand();
         Player p = e.getPlayer();
-        if(isSwap && (!dontSwapMultiple.equals(p)) && (item.equals(TruceFeature.swapPlacesReceiver) || item.equals(TruceFeature.swapPlacesSender)) && TruceFeature.truceMap.get(p).contains(dontSwapMultiple) && !(e.getAction() == Action.LEFT_CLICK_AIR) && !(e.getAction() == Action.LEFT_CLICK_BLOCK))
+        if((item.equals(TruceFeature.swapPlacesReceiver) || item.equals(TruceFeature.swapPlacesSender)) && !(e.getAction() == Action.RIGHT_CLICK_AIR) && !(e.getAction() == Action.RIGHT_CLICK_BLOCK))
         {
-            p.sendMessage("inside else if checking for other person clicking swap");
             String[] name = item.getItemMeta().getDisplayName().split(" ");
             String pName = name[0].substring(2);
-            for(int i = 0; i < TruceFeature.truceMap.get(p).size(); i++)
-            {
-                if(TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName))
-                {
-                    TruceFeature.cooldownMap.get(dontSwapMultiple).set(i + i + 1, false);
-                    swapTrack = 0;
-                    int inum = i;
-                    Location truceLocation = TruceFeature.truceMap.get(p).get(i).getLocation();
-                    Location pLocation = p.getLocation();
-                    p.teleport(truceLocation);
-                    TruceFeature.truceMap.get(p).get(i).getPlayer().teleport(pLocation);
-                    isSwap = false;
-
-                    new BukkitRunnable()
+            for (int i = 0; i < TruceFeature.truceMap.get(p).size(); i++) {
+                if (TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName)) {
+                    Player check = TruceFeature.truceMap.get(p).get(i).getPlayer();
+                    int cori = TruceFeature.truceMap.get(check).indexOf(p);
+                    if (TruceFeature.cooldownMap.get(check).get((cori * 3) + 2) == true && TruceFeature.cooldownMap.get(check).get((cori * 3) + 1) == true)
                     {
 
-                        @Override
-                        public void run() {
-                            swapTrack++;
-                            if(swapTrack == 2)
-                            {
-                                swapTrack = 0;
-                                TruceFeature.cooldownMap.get(dontSwapMultiple).set(inum + inum + 1, true);
-                                Bukkit.getServer().getScheduler().cancelTasks(getInstance());
+                        TruceFeature.cooldownMap.get(check).set((cori * 3) + 1, false);
+                        TruceFeature.cooldownMap.get(check).set((cori * 3) + 2, false);
+                        //TruceFeature.cooldownMap.get(check).set(cori + cori + cori + 2, false);
+                        swapTrack = 0;
+                        int corint = cori;
+                        Location truceLocation = TruceFeature.truceMap.get(p).get(i).getLocation();
+                        Location pLocation = p.getLocation();
+                        p.teleport(truceLocation);
+                        TruceFeature.truceMap.get(p).get(i).getPlayer().teleport(pLocation);
+
+                        new BukkitRunnable() {
+
+                            @Override
+                            public void run() {
+                                swapTrack++;
+                                if (swapTrack == 2) {
+                                    swapTrack = 0;
+                                    TruceFeature.cooldownMap.get(check).set((cori * 3) + 1, true);
+                                    //TruceFeature.cooldownMap.get(check).set(corint + corint + corint + 2, true);
+                                    Bukkit.getServer().getScheduler().cancelTasks(getInstance());
+                                }
                             }
-                        }
-                    }.runTaskTimer(getInstance(), 0, 40);
+                        }.runTaskTimer(getInstance(), 0, 40);
+                    }
+                    else if (TruceFeature.cooldownMap.get(check).get((cori * 3)+ 2) == false)
+                    {
+                        p.sendMessage("This person has not requested a swap");
+                    }
+                    else if (TruceFeature.cooldownMap.get(check).get((cori * 3) + 1) == false)
+                    {
+                        p.sendMessage("This person must wait their cooldown");
+                    }
                 }
             }
         }
-        else if(isSwap && p == dontSwapMultiple)
-        {
-            p.sendMessage("You must wait for a response");
-        }
-        else if((item.equals(TruceFeature.swapPlacesReceiver) || item.equals(TruceFeature.swapPlacesSender)) && isSwap == false && !(e.getAction() == Action.LEFT_CLICK_AIR) && !(e.getAction() == Action.LEFT_CLICK_BLOCK))
+        else if((item.equals(TruceFeature.swapPlacesReceiver) || item.equals(TruceFeature.swapPlacesSender)) && !(e.getAction() == Action.LEFT_CLICK_AIR) && !(e.getAction() == Action.LEFT_CLICK_BLOCK))
         {
             dontSwapMultiple = p;
             String[] name = item.getItemMeta().getDisplayName().split(" ");
             String pName = name[0].substring(2);
             for(int i = 0; i < TruceFeature.truceMap.get(p).size(); i++)
             {
-                if(TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName) && TruceFeature.cooldownMap.get(p).get(i + i + 1))
+                p.sendMessage( String.valueOf(TruceFeature.cooldownMap.get(p).size()));
+                if(TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName))
                 {
-                    //TruceFeature.cooldownMap.get(p).set(i + i + 1, false);
-                    track = 0;
-                    Player otherPlayer = TruceFeature.truceMap.get(p).get(i).getPlayer();
-                    otherPlayer.sendMessage(p + " wants to swap places. Right click the swap item to do so.");
-                    otherPlayer.sendMessage("If you don't want to swap places, ignore this");
-                    isSwap = true;
+                    if (TruceFeature.cooldownMap.get(p).get((3 * i) + 1))
+                    {
+                        if (TruceFeature.cooldownMap.get(p).get((i * 3) + 2) == false)
+                        {
+                            //TruceFeature.cooldownMap.get(p).set(i + i + 1, false);
+                            TruceFeature.cooldownMap.get(p).set((i * 3) + 2, true);
+                            track = 0;
+                            Player otherPlayer = TruceFeature.truceMap.get(p).get(i).getPlayer();
+                            otherPlayer.sendMessage(ChatColor.BLUE + p.getName() + " wants to swap places. Left click the swap item to do so.");
+                            otherPlayer.sendMessage("If you don't want to swap places, ignore this");
+
+                            Player check = TruceFeature.truceMap.get(p).get(i).getPlayer();
+
+                            int inum = TruceFeature.truceMap.get(p).indexOf(check);
+
+                            new BukkitRunnable() {
+                                @Override
+                                public void run() {
+                                    track++;
+                                    if (track == 2) {
+                                        track = 0;
+                                        TruceFeature.cooldownMap.get(p).set((inum * 3) + 2, false);
+                                        Bukkit.getServer().getScheduler().cancelTasks(getInstance());
+                                    }
+                                }
+                            }.runTaskTimer(getInstance(), 0, 100);
+                        }
+                        else {
+                            p.sendMessage("You must wait for the person to respond");
+                        }
+                    }
+                    else {
+                        p.sendMessage("You must wait for YOUR cooldown to end");
+                    }
+                }
+                else
+                {
+                    p.sendMessage("This player name is invalid");
                 }
             }
             //Player otherPlayer = TruceFeature.truceMap.get(p).get(0).getPlayer();
-
-            new BukkitRunnable()
-            {
-
-                @Override
-                public void run() {
-                    track++;
-                    if(track == 2)
-                    {
-                        track = 0;
-                        isSwap = false;
-                        Bukkit.getServer().getScheduler().cancelTasks(getInstance());
-                    }
-                }
-            }.runTaskTimer(getInstance(), 0, 100);
         }
         //p.sendMessage("entering if");
         else if((item.equals(TruceFeature.teleporterReceiver) || item.equals(TruceFeature.teleporterSender)) && !(e.getAction() == Action.LEFT_CLICK_AIR) && !(e.getAction() == Action.LEFT_CLICK_BLOCK))
@@ -128,29 +170,38 @@ public final class Dontknow extends JavaPlugin implements Listener {
             String pName = name[0].substring(2);
             for(int i = 0; i < TruceFeature.truceMap.get(p).size(); i++)
             {
-                if(TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName) && TruceFeature.cooldownMap.get(p).get(i + i))
+                if(TruceFeature.truceMap.get(p).get(i).getDisplayName().equalsIgnoreCase(pName))
                 {
-                    //make cooldown for this
-                    int in = i;
-                    TruceFeature.cooldownMap.get(p).set(i + i, false);
-                    tpTrack = 0;
-                    Location tpLocation = TruceFeature.truceMap.get(p).get(i).getLocation();
-                    p.teleport(tpLocation);
-
-                    new BukkitRunnable()
+                    if (TruceFeature.cooldownMap.get(p).get(3 * i))
                     {
+                        //make cooldown for this
+                        TruceFeature.cooldownMap.get(p).set(3 * i, false);
+                        int in = i;
+                        tpTrack = 0;
+                        Location tpLocation = TruceFeature.truceMap.get(p).get(i).getLocation();
+                        p.teleport(tpLocation);
 
-                        @Override
-                        public void run() {
-                            tpTrack++;
-                            if(tpTrack == 2)
-                            {
-                                tpTrack = 0;
-                                TruceFeature.cooldownMap.get(p).set(in + in, true);
-                                Bukkit.getServer().getScheduler().cancelTasks(getInstance());
+                        new BukkitRunnable() {
+
+                            @Override
+                            public void run() {
+                                tpTrack++;
+                                if (tpTrack == 2) {
+                                    tpTrack = 0;
+                                    TruceFeature.cooldownMap.get(p).set((in * 3), true);
+                                    Bukkit.getServer().getScheduler().cancelTasks(getInstance());
+                                }
                             }
-                        }
-                    }.runTaskTimer(getInstance(), 0, 40);
+                        }.runTaskTimer(getInstance(), 0, 40);
+                    }
+                    else
+                    {
+                        p.sendMessage("Wait for your canTP cooldown to end");
+                    }
+                }
+                else
+                {
+                    p.sendMessage("This is an invalid player name");
                 }
             }
         }

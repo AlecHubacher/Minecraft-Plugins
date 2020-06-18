@@ -8,3 +8,5 @@ commands:
     description: Allows for trucing in game
   Setsolo:
     description: Sets a solo player for game
+  Findplayer:
+    description: Finds the solo player
